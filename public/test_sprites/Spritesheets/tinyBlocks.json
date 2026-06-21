@@ -1,0 +1,18 @@
+{
+  "frames": [
+    {
+      "filename": "pale_green_grass",
+      "frame": { "x": 0, "y": 0, "w": 18, "h": 18 },
+      "rotated": false,
+      "trimmed": false,
+      "sourceSize": { "w": 18, "h": 18 },
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 18, "h": 18 }
+    }
+  ],
+  "meta": {
+    "image": "tinyBlocks.png",
+    "format": "RGBA8888",
+    "size": { "w": 180, "h": 180 },
+    "scale": 1
+  }
+}
