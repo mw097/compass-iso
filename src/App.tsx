@@ -4,6 +4,7 @@ import {Application, extend} from '@pixi/react';
 import { useEffect, useState } from 'react';
 // import { Plant } from './shared/plant/Plant';
 import {WorldMap} from './game-core/world-map/WorldMap';
+import { ToolBar } from './ui/tool-bar/ToolBar';
 
 
 extend({
@@ -29,7 +30,7 @@ export default function App() {
     <Application resizeTo={window}>
       {/* {textures?.length ? <Plant textures={textures} growthState={2}/> : null} */}
       {textures?.length ? <WorldMap textures={textures}/> : null}
-      {/* <TestSprite></TestSprite> */}
+      {textures?.length ? <ToolBar/> : null}
     </Application>
   )
 }

@@ -1,14 +1,19 @@
 import type { Texture } from "pixi.js";
 import { useState, type JSX } from "react";
+import { useWorldStore } from "../../store/worldStore";
 
 interface BlockProps {
   x: number,
   y: number,
+  gridX: number,
+  gridY: number,
+  type: string,
   texture: Texture
 }
 
-const Block = ({x,y, texture}: BlockProps): JSX.Element => {
+const Block = ({x,y,gridX, gridY, texture}: BlockProps): JSX.Element => {
   const [elevation, setElevation] = useState(0);
+  const {setBlock} = useWorldStore();
 
   return (
     <pixiSprite
@@ -18,7 +23,7 @@ const Block = ({x,y, texture}: BlockProps): JSX.Element => {
       anchor={{ x: 0, y: 0 }}
       scale={4}
       eventMode="static"
-      onClick={() => {}}
+      onClick={() => setBlock(gridX, gridY, 'field')}
       onMouseEnter={() => setElevation(-15)}
       onMouseLeave={() => setElevation(0)}
     />);

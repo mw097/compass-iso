@@ -1,7 +1,8 @@
 import type { Texture } from "pixi.js";
-import { useMemo, type JSX } from "react";
-import { generateGrid, screenToIsometric } from "../../lib/isometric";
+import { type JSX } from "react";
+import { screenToIsometric } from "../../lib/isometric";
 import { Block } from "../block/Block";
+import { useWorldStore } from "../../store/worldStore";
 
 interface WorldMapProps {
   textures: Texture[]
@@ -9,19 +10,24 @@ interface WorldMapProps {
 
 const WorldMap = ({textures}: WorldMapProps): JSX.Element => {
 
-  const grid = useMemo(() => generateGrid(16,16, (x,y) => ({x, y})), []);
+  const grid = useWorldStore(s => s.worldGrid);
 
   return (
     <pixiContainer>
-      {textures.length ? grid.map(({x, y}) => {
-        const [isometricX, isometricY] = screenToIsometric({x,y});
+      {textures.length ? grid.map(({x, y, type}) => {
+        const [isometricX, isometricY] = screenToIsometric(x,y);
+
+        const selectedTexture = type === 'grass' ? textures[0] : type === 'field' ? textures[1] : textures[2];
 
         return (
           <Block
             key={`${isometricX},${isometricY}`}
-            texture={textures[0]}
+            texture={selectedTexture}
             x={isometricX}
             y={isometricY}
+            gridX={x}
+            gridY={y}
+            type={type}
           />
         )
       }) : null}
