@@ -1,0 +1,30 @@
+{
+  "frames": {
+    "grass": {
+      "frame": { "x": 0, "y": 0, "w": 18, "h": 18 },
+      "sourceSize": { "w": 18, "h": 18 },
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 18, "h": 18 }
+    },
+    "field": {
+      "frame": { "x": 108, "y": 0, "w": 18, "h": 18 },
+      "sourceSize": { "w": 18, "h": 18 },
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 18, "h": 18 }
+    },
+    "water": {
+      "frame": { "x": 54, "y": 36, "w": 18, "h": 18 },
+      "sourceSize": { "w": 18, "h": 18 },
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 18, "h": 18 }
+    },
+    "flower": {
+      "frame": { "x": 72, "y": 90, "w": 18, "h": 18 },
+      "sourceSize": { "w": 18, "h": 18 },
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 18, "h": 18 }
+    }
+  },
+  "meta": {
+    "image": "tinyBlocks.png",
+    "format": "RGBA8888",
+    "size": { "w": 180, "h": 180 },
+    "scale": 1
+  }
+}
