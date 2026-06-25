@@ -16,7 +16,7 @@ extend({
 });
 
 export default function App() {
-  useLoadTextures('/test_sprites/Spritesheets/tinyBlocks.json');
+  useLoadTextures(`${import.meta.env.BASE_URL}test_sprites/Spritesheets/tinyBlocks.json`);
   const { loading: loadingTextures, error: errorTextures } = useTextureStore();
 
   if (loadingTextures) return <div>Loading...</div>
