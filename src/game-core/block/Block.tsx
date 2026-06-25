@@ -36,7 +36,6 @@ const Block = ({x,y,gridX, gridY, textures, type, plant}: BlockProps): JSX.Eleme
         texture={textures['grass']}
         x={x}
         y={y + elevation}
-        growthState={0}
       />
       : null }
     </>);

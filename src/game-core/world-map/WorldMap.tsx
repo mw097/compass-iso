@@ -1,4 +1,4 @@
-import { FederatedPointerEvent, Rectangle, type FederatedWheelEvent } from "pixi.js";
+import { FederatedPointerEvent, type FederatedWheelEvent } from "pixi.js";
 import { useRef, type JSX } from "react";
 import { screenToIsometric } from "../../lib/isometric";
 import { Block } from "../block/Block";

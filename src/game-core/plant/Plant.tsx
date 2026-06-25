@@ -4,11 +4,10 @@ import { useEffect, useRef, type JSX } from "react";
 interface PlantProps {
   x: number;
   y: number;
-  growthState: number;
   texture: Texture
 }
 
-const Plant = ({x, y, growthState, texture}: PlantProps): JSX.Element => {
+const Plant = ({x, y, texture}: PlantProps): JSX.Element => {
   const ref = useRef<AnimatedSprite>(null);
 
   useEffect(() => {
