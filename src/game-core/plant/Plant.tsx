@@ -1,14 +1,15 @@
-import type { AnimatedSprite, AnimatedSpriteFrames, Texture, TextureSource } from "pixi.js";
+import type { AnimatedSprite, Texture } from "pixi.js";
 import { useEffect, useRef, type JSX } from "react";
 
 interface PlantProps {
+  x: number;
+  y: number;
   growthState: number;
-  textures: AnimatedSpriteFrames
+  texture: Texture
 }
 
-const Plant = ({growthState, textures}: PlantProps): JSX.Element => {
+const Plant = ({x, y, growthState, texture}: PlantProps): JSX.Element => {
   const ref = useRef<AnimatedSprite>(null);
-  const texture  = (growthState < textures.length ? textures[growthState] : textures[0]) as  Texture<TextureSource>;
 
   useEffect(() => {
     if (ref.current) {
@@ -17,14 +18,14 @@ const Plant = ({growthState, textures}: PlantProps): JSX.Element => {
   }, []);
 
   return (
-    <>
     <pixiSprite
         texture={texture}
-        scale={2}
-        x={100}
-        y={100}
-        anchor={1}/>
-    </>
+        anchor={{ x: 0.5, y: 1 }}
+        scale={4}
+        x={x}
+        y={y - 36}
+        eventMode="none"
+    />
   );
 }
 

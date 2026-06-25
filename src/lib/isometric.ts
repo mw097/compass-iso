@@ -18,6 +18,7 @@ export type Block = {
   x: number,
   y: number,
   type: string,
+  plant?: 'flower' | null;
 }
 
 export function screenToIsometric (x: number, y: number): number[] {
@@ -26,7 +27,7 @@ export function screenToIsometric (x: number, y: number): number[] {
   return isometricCoordinate as number[];
 };
 
-export function generateGrid<T extends Block = Block>(rows: number, cols: number, blockProvider: (x: number, y: number, type: string) => T): T[] {
+export function generateGrid<T extends Block = Block>(rows: number, cols: number, blockProvider: (x: number, y: number, type: string, plant?: 'flower' | null) => T): T[] {
   const grid: T[] = [];
   const noiseFn = getGridNoise('seed');
 

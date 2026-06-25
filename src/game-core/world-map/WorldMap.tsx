@@ -1,38 +1,56 @@
-import type { Texture } from "pixi.js";
-import { type JSX } from "react";
+import { FederatedPointerEvent, Rectangle, type FederatedWheelEvent } from "pixi.js";
+import { useRef, type JSX } from "react";
 import { screenToIsometric } from "../../lib/isometric";
 import { Block } from "../block/Block";
 import { useWorldStore } from "../../store/worldStore";
+import { useCameraStore } from "../../store/cameraStore";
+import { useTextureStore } from "../../store/useTextureStore";
+import { HIT_AREA } from "../../configs/map-constants";
 
-interface WorldMapProps {
-  textures: Texture[]
-}
 
-const WorldMap = ({textures}: WorldMapProps): JSX.Element => {
-
+export const WorldMap = (): JSX.Element => {
   const grid = useWorldStore(s => s.worldGrid);
+  const {x, y, zoom, pan, setZoom} = useCameraStore();
+  const dragging = useRef(false)
+  const last = useRef({ x: 0, y: 0 })
+  const textures = useTextureStore((s) => s.textures)
 
   return (
-    <pixiContainer>
-      {textures.length ? grid.map(({x, y, type}) => {
+    <pixiContainer
+      x={x}
+      y={y}
+      scale={zoom}
+      eventMode="static"
+      onWheel={(e: FederatedWheelEvent) => setZoom(zoom - e.deltaY * 0.001)}
+      hitArea={HIT_AREA}
+      onPointerDown={(e: FederatedPointerEvent) => {
+        dragging.current = true;
+        last.current = {x: e.globalX, y: e.globalY}
+      }}
+      onPointerMove={(e: FederatedPointerEvent) => {
+          if (!dragging.current) return
+          pan(e.clientX - last.current.x, e.clientY - last.current.y)
+          last.current = { x: e.clientX, y: e.clientY }
+        }}
+      onPointerUp={() => { dragging.current = false }}
+      onPointerLeave={() => { dragging.current = false }}
+    >
+      {Object.keys(textures).length ? grid.map(({x, y, type, plant}) => {
         const [isometricX, isometricY] = screenToIsometric(x,y);
-
-        const selectedTexture = type === 'grass' ? textures[0] : type === 'field' ? textures[1] : textures[2];
 
         return (
           <Block
             key={`${isometricX},${isometricY}`}
-            texture={selectedTexture}
+            textures={textures}
             x={isometricX}
             y={isometricY}
             gridX={x}
             gridY={y}
             type={type}
+            plant={plant}
           />
         )
       }) : null}
     </pixiContainer>
   );
 };
-
-export {WorldMap, type WorldMapProps};
