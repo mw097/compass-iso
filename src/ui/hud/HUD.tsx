@@ -1,7 +1,7 @@
 import type { JSX } from "react";
 import { useUiStore } from "../../store/uiStore";
 
-const ToolBar = (): JSX.Element => {
+export const HUD = (): JSX.Element => {
   const {selectTool, selectedTool, tools} = useUiStore();
 
   return (
@@ -30,5 +30,3 @@ const ToolBar = (): JSX.Element => {
     </pixiContainer>
   );
 }
-
-export {ToolBar};

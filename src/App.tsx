@@ -1,10 +1,10 @@
 import { Container, Graphics, Sprite, AnimatedSprite, Text } from 'pixi.js';
 import './App.module.scss';
 import {Application, extend} from '@pixi/react';
-import {WorldMap} from './game-core/world-map/WorldMap';
-import { ToolBar } from './ui/tool-bar/ToolBar';
 import { useTextureStore } from './store/useTextureStore';
 import { useLoadTextures } from './hooks/useLoadTextures';
+import { GameCamera } from './game-core/game/GameCamera';
+import { HUD } from './ui/hud/HUD';
 
 
 extend({
@@ -24,8 +24,8 @@ export default function App() {
 
   return (
     <Application resizeTo={window}>
-      <WorldMap/>
-      <ToolBar/>
+      <GameCamera />
+      <HUD/>
     </Application>
   )
 }
