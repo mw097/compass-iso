@@ -1,54 +1,70 @@
-import { matrix, multiply } from "mathjs";
-import alea from 'alea';
-import { createNoise2D, type NoiseFunction2D } from 'simplex-noise';
+import alea from "alea";
+import { createNoise2D, type NoiseFunction2D } from "simplex-noise";
+import type { TerrainBlock } from "../types/types";
+import {
+  OBJECT_REGISTRY,
+  type GameObjectDefinition,
+  type GameObjectType,
+  type TerrainType,
+    TERRAIN_TEXTURE_W,
+  TERRAIN_TEXTURE_H,
+} from "../configs/map-constants";
 
-
-export const ISOMETRIC_WEIGHTS = matrix([
-    [0.5, 0.25],
-    [-0.5, 0.25]
-]);
-
-// Coordinate x times the size of the block 18 * 4 = 72
-// as it's scaled 4x
-export const getCoordinate = (x: number, y: number) => matrix([
-  [x * 72, y * 72]
-]);
-
-export type Block = {
-  x: number,
-  y: number,
-  type: string,
-  plant?: 'flower' | null;
+export function gridToScreen(x: number, y: number): [number, number] {
+  return [
+    (x - y) * TERRAIN_TEXTURE_W,
+    (x + y) * TERRAIN_TEXTURE_H,
+  ];
 }
 
-export function screenToIsometric (x: number, y: number): number[] {
-  const coordinate = getCoordinate(x,y);
-  const [isometricCoordinate] = multiply(coordinate, ISOMETRIC_WEIGHTS).toArray();
-  return isometricCoordinate as number[];
-};
-
-export function generateGrid<T extends Block = Block>(rows: number, cols: number, blockProvider: (x: number, y: number, type: string, plant?: 'flower' | null) => T): T[] {
+export function generateGrid<T extends TerrainBlock = TerrainBlock>(
+  rows: number,
+  cols: number,
+  blockProvider: ({
+    x,
+    y,
+    terrainType,
+    elevation,
+    passable,
+    buildable,
+  }: T) => T
+): T[] {
   const grid: T[] = [];
-  const noiseFn = getGridNoise('seed');
+  const noiseFn = getGridNoise("seed");
 
   for (let i = 0; i < rows; i++) {
     for (let j = 0; j < cols; j++) {
-      const type = getBlockType(noiseFn(i /50, j/50));
-      grid.push(blockProvider(i,j, type));
+      const terrainType = getTerrainType(noiseFn(i / 50, j / 50));
+
+      grid.push(
+        blockProvider({
+          x: i,
+          y: j,
+          terrainType,
+          elevation: 0,
+          passable: true,
+          buildable: true,
+        } as T)
+      );
     }
   }
 
   return grid;
-};
+}
 
 export function getGridNoise(seed: string): NoiseFunction2D {
-  const prng = alea(seed);
-  const noise2D = createNoise2D(prng);
-  return noise2D;
+  return createNoise2D(alea(seed));
 }
 
-export function getBlockType(noiseValue: number): string {
-  if (noiseValue > 0.3) return 'grass';
-  if (noiseValue > -0.2) return 'field';
-  return 'water';
+export function getTerrainType(noiseValue: number): TerrainType {
+  if (noiseValue > 0.3) return "grass";
+  if (noiseValue > -0.2) return "field";
+  return "water";
 }
+
+export const getPositionalIdKey = (x: number, y: number): string =>
+  `${x},${y}`;
+
+export const getDefinition = (
+  type: GameObjectType
+): GameObjectDefinition => OBJECT_REGISTRY[type];

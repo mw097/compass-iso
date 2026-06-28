@@ -1,13 +1,14 @@
 import {create} from 'zustand';
+import type { GameObjectType } from '../configs/map-constants';
 
 export interface UiState {
-  tools: string[];
-  selectedTool: string;
-  selectTool: (selectedTool: string) => void;
+  gameObjects: GameObjectType[],
+  selectedGameObject: GameObjectType | null;
+  selectGameObjects: (selectedGameObject: GameObjectType) => void;
 }
 
 export const useUiStore = create<UiState>()((set) => ({
-  tools: ['hoe', 'pickaxe'],
-  selectedTool: 'none',
-  selectTool: (selectedTool) => set(() => ({selectedTool})),
+  gameObjects: ['flower', 'house', 'tree'],
+  selectedGameObject: null,
+  selectGameObjects: (selectedGameObject) => set(() => ({selectedGameObject})),
 }));

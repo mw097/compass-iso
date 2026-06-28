@@ -1,24 +1,24 @@
 {
   "frames": {
     "grass": {
-      "frame": { "x": 0, "y": 0, "w": 18, "h": 18 },
-      "sourceSize": { "w": 18, "h": 18 },
-      "spriteSourceSize": { "x": 0, "y": 0, "w": 18, "h": 18 }
+      "frame": { "x": 1, "y": 0, "w": 16, "h": 18 },
+      "sourceSize": { "w": 16, "h": 18 },
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 16, "h": 18 }
     },
     "field": {
-      "frame": { "x": 108, "y": 0, "w": 18, "h": 18 },
-      "sourceSize": { "w": 18, "h": 18 },
-      "spriteSourceSize": { "x": 0, "y": 0, "w": 18, "h": 18 }
+      "frame": { "x": 109, "y": 0, "w": 16, "h": 18 },
+      "sourceSize": { "w": 16, "h": 18 },
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 16, "h": 18 }
     },
     "water": {
-      "frame": { "x": 54, "y": 36, "w": 18, "h": 18 },
-      "sourceSize": { "w": 18, "h": 18 },
-      "spriteSourceSize": { "x": 0, "y": 0, "w": 18, "h": 18 }
+      "frame": { "x": 55, "y": 36, "w": 16, "h": 18 },
+      "sourceSize": { "w": 16, "h": 18 },
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 16, "h": 18 }
     },
     "flower": {
-      "frame": { "x": 72, "y": 90, "w": 18, "h": 18 },
-      "sourceSize": { "w": 18, "h": 18 },
-      "spriteSourceSize": { "x": 0, "y": 0, "w": 18, "h": 18 }
+      "frame": { "x": 73, "y": 90, "w": 16, "h": 18 },
+      "sourceSize": { "w": 16, "h": 18 },
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 16, "h": 18 }
     }
   },
   "meta": {

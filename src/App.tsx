@@ -3,8 +3,9 @@ import './App.module.scss';
 import {Application, extend} from '@pixi/react';
 import { useTextureStore } from './store/useTextureStore';
 import { useLoadTextures } from './hooks/useLoadTextures';
-import { GameCamera } from './game-core/game/GameCamera';
+import { GameCamera } from './gameCore/game/GameCamera';
 import { HUD } from './ui/hud/HUD';
+import { DevTools } from './utils/DevTools/DevTools';
 
 
 extend({
@@ -24,6 +25,7 @@ export default function App() {
 
   return (
     <Application resizeTo={window}>
+      <DevTools />
       <GameCamera />
       <HUD/>
     </Application>

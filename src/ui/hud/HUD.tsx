@@ -2,25 +2,25 @@ import type { JSX } from "react";
 import { useUiStore } from "../../store/uiStore";
 
 export const HUD = (): JSX.Element => {
-  const {selectTool, selectedTool, tools} = useUiStore();
+  const {selectGameObjects, selectedGameObject, gameObjects} = useUiStore();
 
   return (
     <pixiContainer anchor={0} position={{x:10,y:10}}>
       <pixiText
-        text={`Selected tool: ${selectedTool}`}
+        text={`Selected tool: ${selectedGameObject}`}
         style={{fill: 'white', fontSize: 30}}
         position={{x: 10, y: 0}}
       />
       {
-        tools.length ? tools.map((tool, idx) => {
+        gameObjects.length ? gameObjects.map((gameObject, idx) => {
 
           return (
             <pixiText
-              key={tool}
-              text={tool}
+              key={gameObject}
+              text={gameObject}
               style={{fill: 'white', fontSize: 30}}
               eventMode="static"
-              onClick={() => selectTool(tool)}
+              onClick={() => selectGameObjects(gameObject)}
               position={{x: 10, y: (idx + 1) * 35}}
               />
           );

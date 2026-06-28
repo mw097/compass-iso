@@ -6,7 +6,7 @@ export function useLoadTextures(atlasPath: string) {
   const { setTextures, setLoading, setError } = useTextureStore();
 
   useEffect(() => {
-    setLoading(true)
+    setLoading(true);
 
     const load = async () => {
       try {
@@ -20,6 +20,6 @@ export function useLoadTextures(atlasPath: string) {
       }
     }
 
-    load()
+    load();
   }, [atlasPath])
 }
